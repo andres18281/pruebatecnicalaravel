@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  laravel:
+    build:
+      context: ./backendproyect
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"  # Corregido el puerto de Laravel
+    volumes:
+      - ./backendproyect:/var/www/html
+    depends_on:
+      - mysql
+
+  vue:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./frontend:/app
+
+  mysql:
+    build:
+      context: ./db
+      dockerfile: Dockerfile
+      
